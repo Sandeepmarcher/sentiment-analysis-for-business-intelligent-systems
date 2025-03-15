@@ -41,7 +41,7 @@ def google_login():
         return jsonify({"success": False, "error": str(e)}), 400
 
 def get_db_connection():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect('d1.db')
     conn.row_factory = sqlite3.Row
     return conn
 
