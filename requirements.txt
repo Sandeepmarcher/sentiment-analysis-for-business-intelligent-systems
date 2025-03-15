@@ -6,3 +6,4 @@ meta-ai-api
 google-auth
 google-auth-oauthlib
 google-auth-httplib2
+gunicorn
