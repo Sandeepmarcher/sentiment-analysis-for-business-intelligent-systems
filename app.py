@@ -6,6 +6,7 @@ import pandas as pd
 from meta_ai_api import MetaAI  # Import MetaAI
 from google.auth.transport import requests
 from google.oauth2 import id_token
+import os
 
 app = Flask(__name__)
 app.secret_key = "marC12@$"
@@ -215,5 +216,6 @@ def generate_review():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
