@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <title>Sign Up | Duplicate</title>
+    <link rel="stylesheet" href="https://cdn.dribbble.com/assets/auth-eab2bb3ae8f893e2399931c93dc47be6015bc540b8c052a73bbb573c54a1aa62.css"/>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("https://cdn.shopifycdn.net/s/files/1/0598/3263/1453/files/star-background-gif-_no-shooting-star.gif?v=1668992315");
+        }
+        .auth-content {
+            width: 400px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .social-icons {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .social-icons:hover {
+            transform: scale(1.2);
+        }
+        .or-divider {
+            margin: 15px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-content">
+        <h2>Sign Up</h2>
+        <form action="{{ url_for('signup') }}" method="post">
+            <fieldset>
+                <label for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" class="text-input" required>
+            </fieldset>
+            <fieldset>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="text-input" required>
+            </fieldset>
+            <fieldset>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="text-input" required>
+            </fieldset>
+            <fieldset>
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="text-input" required>
+            </fieldset>
+            <input class="btn2 btn2--large btn2--full-width" type="submit" value="Sign Up"/>
+        </form>
+        <p class="or-divider">or</p>
+        <div id="g_id_onload"
+        data-client_id="1052942748140-pckh7s60h481t7gcvkjrajg3boi8s8ut.apps.googleusercontent.com"
+        data-context="signin"
+        data-ux_mode="popup"
+        data-callback="handleCredentialResponse"
+        data-itp_support="true">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-theme="outline" data-size="large"></div>
+    
+        <p>Already have an account? <a href="{{ url_for('sign') }}">Sign in</a></p>
+    </div>
+</body>
+<script>
+    function handleCredentialResponse(response) {
+        if (!response.credential) {
+            alert("Google Sign-In failed! No credential received.");
+            return;
+        }
+
+        fetch('/google-login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: response.credential })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "/dashboard";  // Redirect on success
+            } else {
+                alert("Google Sign-In failed: " + data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An unexpected error occurred.");
+        });
+    }
+</script>
+
+</html>

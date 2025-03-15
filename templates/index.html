@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.dribbble.com/assets/auth-eab2bb3ae8f893e2399931c93dc47be6015bc540b8c052a73bbb573c54a1aa62.css"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+            text-align: center;
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: #ff8c00 #243b55;
+        }
+        .logo {
+            position: absolute;
+            left: 50px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #243b55;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000000;
+            border-radius: 10px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 50px;
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 0;
+        }
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-links li a:hover {
+            color: #ff8c00;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .cta-button {
+            background: #ff8c00;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .cta-button:hover {
+            background: #e67e22;
+            transform: scale(1.1);
+        }
+        .p{
+            color: aliceblue;
+        }
+        .footer {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis for busniness intelligence systems</h1>
+
+    <label for="product" class="text-input">Select Product:</label>
+    <select id="product" class="text-input">
+        {% for product in products %}
+        <option value="{{ product }}">{{ product }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="brand" class="text-input">Select Brand:</label>
+    <select id="brand" class="text-input">
+        {% for brand in brands %}
+        <option value="{{ brand }}">{{ brand }}</option>
+        {% endfor %}
+    </select>
+
+    <button id="analyze-btn" class="text-input">Analyze</button>
+
+    <h2 id="price"></h2>
+    <h2 id="avg-rating"></h2>
+    <div id="chart"></div>
+    <div id="reviews"></div>
+
+    <h2>AI Review Generator</h2>
+    <input type="text" id="review-input" class="text-input" placeholder="Enter a product name...">
+    <button id="generate-btn" class="text-input">Generate Review</button>
+    <p id="generated-review" class="p"></p>
+    <p id="reviewOutput">AI Review will appear here.</p>
+
+    <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
