@@ -8,7 +8,7 @@ from google.auth.transport import requests
 from google.oauth2 import id_token
 import os
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static', template_folder='templates')
 app.secret_key = "marC12@$"
 
 # Initialize MetaAI for generating reviews
