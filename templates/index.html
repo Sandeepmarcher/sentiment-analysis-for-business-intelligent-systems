@@ -212,7 +212,12 @@ h3 {
 
 
     <h1 style="color: #cccf09;font-size:50px;">Sentiment Analysis for busniness intelligence systems</h1>
-
+    <label for="brand" class="text-input">Select Brand:</label>
+    <select id="brand" class="text-input">
+        {% for brand in brands %}
+        <option value="{{ brand }}">{{ brand }}</option>
+        {% endfor %}
+    </select>
     <label for="product" class="text-input">Select Product:</label>
     <select id="product" class="text-input">
         {% for product in products %}
@@ -220,12 +225,7 @@ h3 {
         {% endfor %}
     </select>
 
-    <label for="brand" class="text-input">Select Brand:</label>
-    <select id="brand" class="text-input">
-        {% for brand in brands %}
-        <option value="{{ brand }}">{{ brand }}</option>
-        {% endfor %}
-    </select>
+
 
     <button id="analyze-btn" class="text-input">Analyze🔍</button>
 
@@ -233,8 +233,7 @@ h3 {
     <h2 id="avg-rating"></h2>
     <div id="chart"></div>
     <div id="reviews"></div>
-    <h2 style="color: #e67e22;">Ask AI for a review ⬇</h2>
-    <h2>AI Review Generator🤖 </h2>
+    <h2 style="color: #e67e22;">Ask AI for a review ⬇ AI Review Generator🤖 </h2><br>
     <input type="text" id="review-input" class="text-input" placeholder="Enter a product name...">
     <button id="generate-btn" class="text-input">Generate Review🧠</button>
     <p id="generated-review" class="p"></p>
